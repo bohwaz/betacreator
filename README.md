@@ -22,31 +22,42 @@ Afterwards you should have the goog directory at: `<project_root>/js/closure/clo
 Bringing This Project Up to Date (the Year 2020)
 ---
 
+This section explains the bare minimum steps to have a functioning `demo.html` file again.
+
 The test image is not available anymore. Use something else, such as:
+```
 https://cdn-files.apstatic.com/climb/106759952_large_1494138444.jpg
+```
 
-Download a release of Google Closure Library and unzip it. Place the closure-library directory in the /js directory.
-    https://github.com/google/closure-library
-    https://github.com/google/closure-library/archive/master.zip
+Download a release of Google Closure Library and unzip it. Place the `closure-library` directory in the `/js` directory.
+```
+https://github.com/google/closure-library
+https://github.com/google/closure-library/archive/master.zip
+```
 
-Copy BetaCreator to /js/closure-library/closure/goog and rename it as 'bc'
+Copy the directory `BetaCreator` to `/js/closure-library/closure/goog` and rename it as `bc`
 
-From the command line in the /js/closure-library/closure/bin/build/ directory:
-    python depswriter.py --root_with_prefix="../../../../BetaCreator bc" > ../../../../deps.js
+From the command line in the `/js/closure-library/closure/bin/build/` directory, execute:
+```
+python depswriter.py --root_with_prefix="../../../../BetaCreator bc" > ../../../../deps.js
+```
 
-    Documentation for DepsWriter: https://developers.google.com/closure/library/docs/depswriter
+Then, include that deps file in the `demo.html` file:
+```
+<script type="text/javascript" src="js/deps.js"></script>
+```
 
-    Then, include that deps file in the demo.html file:
-        <script type="text/javascript" src="js/deps.js"></script>
+The documentation for DepsWriter is at https://developers.google.com/closure/library/docs/depswriter
 
-goog.dom.query was deprecated (removed now). Use document.querySelector instead:
-https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
-Remove it from the generated deps.js, or better, remove it from the source code and write the deps again.
+`goog.dom.query` has been removed. The recommended replacement is to use [`document.querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) instead. However, the `demo.html` will load fine by simply removing this dependency. Not sure yet where `goog.dom.query` is actually used and would throw an error. So:
+Delete `goog.dom.query` from the generated deps.js or, better, remove it from the source code and generate the deps again.
 
-goog.isNumber and goog.isString were deprecated (removed now). Add this to the javascript, for example before `goog.require("bc.Client")`:
+`goog.isNumber()` and `goog.isString()` have been removed. Define these functions in the javascript, for example before `goog.require("bc.Client")`:
+```
     goog.isString = function(val) {
       return typeof val == 'string';
     };
     goog.isNumber = function(val) {
       return typeof val == 'number';
     };
+```
