@@ -46,13 +46,3 @@ The documentation for DepsWriter is at https://developers.google.com/closure/lib
 
 `goog.dom.query` has been removed. The recommended replacement is to use [`document.querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) instead. However, the `demo.html` will load fine by simply removing this dependency. Not sure yet where `goog.dom.query` is actually used and would throw an error. So:
 Delete `goog.dom.query` from the generated deps.js or, better, remove it from the source code and generate the deps again.
-
-`goog.isNumber()` and `goog.isString()` have been removed. Define these functions in the javascript, for example before `goog.require("bc.Client")`:
-```
-    goog.isString = function(val) {
-      return typeof val == 'string';
-    };
-    goog.isNumber = function(val) {
-      return typeof val == 'number';
-    };
-```
