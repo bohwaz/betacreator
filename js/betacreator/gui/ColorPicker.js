@@ -3,7 +3,6 @@ goog.provide('bc.gui.ColorPicker');
 goog.require('bc.Color');
 goog.require('bc.domBuilder');
 goog.require('goog.positioning');
-goog.require('goog.dom.query');
 
 /**
  * SIMPLE COLOR PICKER
