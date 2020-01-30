@@ -8,7 +8,13 @@
 <script type="text/javascript" src="js/closure/closure/goog/base.js"></script>
 <script type="text/javascript" src="js/bin/deps.js"></script>
 <script>
-goog.require("bc.Client");
+    goog.isString = function(val) {
+        return typeof val == 'string';
+    };
+    goog.isNumber = function(val) {
+        return typeof val == 'number';
+    };
+    goog.require("bc.Client");
 </script>
 
 <script type="text/javascript">
