@@ -6,8 +6,8 @@ BetaCreator is a free tool for the creation of rock climbing route guides/beta p
 See a demo at http://nemophrost.github.com/betacreator/
 
 
-Setting Up A Development Environment
-------------------------------------
+Setting Up A Development Environment (Outdated)
+---
 
 After checking out the git repo you will need to open a command line terminal 
 and go to the directory: `<project_root>/js`
@@ -22,25 +22,21 @@ Afterwards you should have the goog directory at: `<project_root>/js/closure/clo
 Bringing This Project Up to Date (the Year 2020)
 ---
 
-This section explains the bare minimum steps to have a functioning `demo.html` file again.
+This section explains the steps needed to have a functioning `demo.html` file again.
 
-Download a release of Google Closure Library and unzip it. Place the `closure-library` directory in the `/js` directory.
+Download a release of Google Closure Library and unzip it. Create the directory `/js/closure/` and place the unzipped contents in it so that you end up with the directory `/js/closure/closure/goog/`, among others.
 ```
 https://github.com/google/closure-library
 https://github.com/google/closure-library/archive/master.zip
 ```
 
-Copy the directory `BetaCreator` to `/js/closure-library/closure/goog` and rename it as `bc`
-
-From the command line in the `/js/closure-library/closure/bin/build/` directory, execute:
+From the command line in the `/js/closure/closure/bin/build/` directory, execute:
 ```
-python depswriter.py --root_with_prefix="../../../../BetaCreator bc" > ../../../../deps.js
+python depswriter.py --root_with_prefix="../../../../BetaCreator bc" > ../../../../bin/deps.js
 ```
 
-Then, include that deps file in the `demo.html` file:
-```
-<script type="text/javascript" src="js/deps.js"></script>
-```
+Copy the directory `/js/betacreator` to `/js/closure/closure/goog` and rename it as `bc`
+
 
 The documentation for DepsWriter is at https://developers.google.com/closure/library/docs/depswriter
 
