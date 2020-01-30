@@ -44,5 +44,4 @@ Then, include that deps file in the `demo.html` file:
 
 The documentation for DepsWriter is at https://developers.google.com/closure/library/docs/depswriter
 
-`goog.dom.query` has been removed. The recommended replacement is to use [`document.querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) instead. However, the `demo.html` will load fine by simply removing this dependency. Not sure yet where `goog.dom.query` is actually used and would throw an error. So:
-Delete `goog.dom.query` from the generated deps.js or, better, remove it from the source code and generate the deps again.
+`goog.dom.query` has been removed. The recommended replacement is to use [`document.querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) instead. However, `demo.html` will load fine by simply removing this dependency. It's been removed from ColorPicker.js already. The color picker will not open and instead will throw an error. To be fixed...
