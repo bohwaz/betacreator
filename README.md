@@ -24,11 +24,6 @@ Bringing This Project Up to Date (the Year 2020)
 
 This section explains the bare minimum steps to have a functioning `demo.html` file again.
 
-The test image is not available anymore. Use something else, such as:
-```
-https://cdn-files.apstatic.com/climb/106759952_large_1494138444.jpg
-```
-
 Download a release of Google Closure Library and unzip it. Place the `closure-library` directory in the `/js` directory.
 ```
 https://github.com/google/closure-library
