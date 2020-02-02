@@ -24,20 +24,23 @@ Bringing This Project Up to Date (the Year 2020)
 
 This section explains the steps needed to have a functioning `demo.html` file again.
 
-Download a release of Google Closure Library and unzip it. Create the directory `/js/closure/` and place the unzipped contents in it so that you end up with the directory `/js/closure/closure/goog/`, among others.
+Download a release of Google Closure Library and unzip it. Create the directory `js/closure/` and place the unzipped contents in it so that you end up with the directory `js/closure/closure/goog/`, among others.
 ```
 https://github.com/google/closure-library
 https://github.com/google/closure-library/archive/master.zip
 ```
 
-From the command line in the `/js/closure/closure/bin/build/` directory, execute:
+From the command line in the `js/closure/closure/bin/build/` directory, execute:
 ```
-python depswriter.py --root_with_prefix="../../../../BetaCreator bc" > ../../../../bin/deps.js
+python depswriter.py --root_with_prefix="../../../../BetaCreator ../bc" > ../../../../bin/deps.js
 ```
 
-Copy the directory `/js/betacreator` to `/js/closure/closure/goog` and rename it as `bc`
-
+Create the symbolic link `js/closure/closure/bc` pointing to `js/betacreator/`:
+```
+cd js
+ln -s betacreator closure/closure/bc
+```
 
 The documentation for DepsWriter is at https://developers.google.com/closure/library/docs/depswriter
 
-`goog.dom.query` has been removed. The recommended replacement is to use [`document.querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) instead. However, `demo.html` will load fine by simply removing this dependency. It's been removed from ColorPicker.js already. The color picker will not open and instead will throw an error. To be fixed...
+`goog.dom.query()` has been removed. The recommended replacement is to use [`document.querySelector()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) instead. However, `demo.html` will load fine by simply removing this dependency. I've updated ColorPicker.js to remove it. The color picker will not open and instead will throw an error. To be fixed...
