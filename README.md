@@ -22,6 +22,6 @@ The documentation for DepsWriter is at https://developers.google.com/closure/lib
 
 The dependencies file tells Google Closure Library to expect the BetaCreator files at `js/closure/closure/bc`. To satisfy this, create the symbolic link `js/closure/closure/bc` pointing to `js/betacreator/`:
 ```
-cd js
-ln -s betacreator closure/closure/bc
+cd js/closure/closure/
+ln -s ../../betacreator bc
 ```
