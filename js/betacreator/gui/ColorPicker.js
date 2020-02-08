@@ -191,7 +191,7 @@ bc.gui.ColorPicker.prototype.resetPreview = function() {
  * @private
  */
 bc.gui.ColorPicker.prototype.highlightSwatch = function(swatch) {
-	goog.array.forEach(/** @type {Array} */(this.swatchContainer.getElementsByClassName('swatch selected')), function(element) {
+	goog.array.forEach(/** @type {Array} */(this.swatchContainer.getElementsByClassName('selected')), function(element) {
 		element.classList.remove('selected');
 	});
 
