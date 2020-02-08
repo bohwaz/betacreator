@@ -163,7 +163,7 @@ bc.gui.ColorPicker = function() {
  */
 bc.gui.ColorPicker.prototype.previewColor = function(color) {
 	if (color && color.rgba()[3] > 0) {
-		goog.dom.classes.remove(this.previewSwatch, 'transparent');
+		this.previewSwatch.classList.remove('transparent');
 		this.previewSwatch.style.backgroundColor = color.hex();
 
 		if (!this.userIsTyping)
