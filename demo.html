@@ -19,9 +19,9 @@ function init() {
 	BetaCreator(document.getElementById('srcImg'), function() {
 		betaCreator = this;
 	},{
-		zoom: 'contain',
-		height: 300,
-		width: 20,
+		width: 1000,
+		height: 750,
+		scaleFactor: 3,
 		onChange: function() {
 			outp.value = "Last changed at: " + new Date();
 		}
