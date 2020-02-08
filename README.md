@@ -42,5 +42,3 @@ ln -s betacreator closure/closure/bc
 ```
 
 The documentation for DepsWriter is at https://developers.google.com/closure/library/docs/depswriter
-
-`goog.dom.query()` has been removed from Google Closure Libray. The recommended replacement is to use [`document.querySelector()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) instead. However, `demo.html` will load fine by simply removing this dependency. I've updated ColorPicker.js to remove it. The color picker will not open and instead will throw an error. To be fixed...
