@@ -13,6 +13,15 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+// These functions have been removed from Google Closure Library, so define them here.
+goog.isString = function(val) {
+    return typeof val == 'string';
+};
+goog.isNumber = function(val) {
+    return typeof val == 'number';
+};
+
 goog.provide('bc.Client');
 
 //goog.require('bc.view.Line');
