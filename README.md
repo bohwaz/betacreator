@@ -6,7 +6,7 @@ BetaCreator is a free tool for the creation of rock climbing route guides/beta p
 See the original demo at http://nemophrost.github.io/betacreator/
 
 
-Setting Up A Development Environment
+Setting Up a Development Environment
 ---
 
 This section explains the steps needed to have a functioning `demo.html` file.
@@ -25,3 +25,21 @@ The dependencies file tells Google Closure Library to expect the BetaCreator fil
 cd js/closure/closure/
 ln -s ../../betacreator bc
 ```
+
+Creating the Deliverable for a Production Environment
+---
+
+Download the Closure Compiler. The latest version is at [https://dl.google.com/closure-compiler/compiler-latest.tar.gz](https://dl.google.com/closure-compiler/compiler-latest.tar.gz).
+
+Create the js deliverable:
+```
+cd js
+closure/closure/bin/build/closurebuilder.py \
+--root=closure \
+--root=closure/closure/bc \
+--namespace=bc.Client \
+--output_mode=compiled \
+--compiler_jar="<your_downloads_directory>/compiler-latest/closure-compiler-v<the_version_number>.jar" \
+> bin/betacreator.js
+```
+You'll need to fill in the path for the downloaded compiler in the `--compiler_jar` flag above.
