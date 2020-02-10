@@ -40,6 +40,9 @@ closure/closure/bin/build/closurebuilder.py \
 --namespace=bc.Client \
 --output_mode=compiled \
 --compiler_jar="<your_downloads_directory>/compiler-latest/closure-compiler-v<the_version_number>.jar" \
+--compiler_flags="--compilation_level=ADVANCED_OPTIMIZATIONS" \
 > bin/betacreator.js
 ```
 You'll need to fill in the path for the downloaded compiler in the `--compiler_jar` flag above.
+
+Compiler documentation: https://developers.google.com/closure/library/docs/closurebuilder#shrinking-code-with-closurebuilder-and-the-closure-compiler
