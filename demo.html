@@ -124,15 +124,14 @@ function loadImage(url, file_name, load_data) {
 		BetaCreator(img, function() {
 			betaCreator = this;
 			if (load_data && localStorage.bcData) {
-				console.log(localStorage.bcData);
 				betaCreator.loadData(localStorage.bcData);
 			}
 			document.querySelector('#name b').innerText = file_name;
 			window.clearInterval(timer);
 			timer = window.setInterval(() => {
+				// Auto-save, as onChange callback does not work
 				localStorage.bcData = betaCreator.getData();
-				console.log(localStorage.bcData);
-			}, 5000);
+			}, 1000);
 		},{
 			zoom: 'contain',
 			height: '100%',
