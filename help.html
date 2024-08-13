@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>BetaCreator - Documentation</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Betacreator</h1>
+        <h2>BetaCreator is a free tool for the creation of rock climbing route guides/beta photos.</h2>
+        <a href="https://github.com/bohwaz/betacreator">View project on GitHub</a>
+        <p>This tool has been created by <a href="https://github.com/nemophrost/betacreator">Alma Madsen</a>.</p>
+        <p><strong>This tool is NOT maintained.</strong></p>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>Try it</h1>
+          <p><a href="./">Click here to open the demo</a></p>
+
+          <h2>How to use the interface</h2>
+          <ul>
+            <li>Click on the upper left button to open a photo from your computer</li>
+            <li>Adjust the scale if required</li>
+            <li>Add lines, bolts, belay stations on the photo</li>
+            <li>The photo and what you added are automatically saved in your web browser. You can only work on one photo at a time.</li>
+            <li>When you're done, click <q>Export image</q> to download a PNG file that you can then embed in a forum, in a paper book, etc.</li>
+            <li>Recommended: If you want to be able to re-edit the shapes you have created later on, click <q>Export shapes</q>, this will download a <code>.json</code> file. This file can be loaded on top of an existing image by using the upper left button.</li>
+          </ul>
+
+          <h1>Using it on your website</h1>
+          <p>These are the original instructions for embedding this software inside an existing website. They have no use for you if you just want to create rock climbing topos.</p>
+
+<h2>Setup</h2>
+
+<p>
+  To use BetaCreator on your site, you will first need to download the code and include the BetaCreator stylesheet, icon sheet, and javascript file on your server. The stylesheet can be found at <code>css/betacreator.css</code>, the icon sheet at <code>css/images/icons_13.png</code>, and the javascript file at <code>js/bin/betacreator.js</code>. The stylesheet expects the icon sheet to be in a folder called <code>images/</code> that exists along side the stylesheet itself.
+</p>
+<p>
+  Next you will need to include the stylesheet and the javascript file in your page headers as follows:
+</p>
+
+<p>
+  <code>&lt;link rel="stylesheet" type="text/css" href="stylesheets/betacreator.css" /&gt;</code>
+</p>
+<p>
+  <code>&lt;script src="javascripts/betacreator.js"&gt;&lt;/script&gt;</code>
+</p>
+
+<h2>Usage</h2>
+
+<p>
+  To create a BetaCreator instance, you must call BetaCreator with an image element as the first parameter. It takes an optional second parameter which contain settings.
+</p>
+<p>
+  <code>
+    BetaCreator(image, onReady, settings);
+  </code>
+</p>
+<p>
+  So, in the simplest case, using BetaCreator would look something like this:
+</p>
+
+<p>
+<code>
+  var foo = BetaCreator(document.getElementById('myImg'));
+</code>
+</p>
+
+<p>
+  With some settings, it might look like this:
+</p>
+
+<p>
+<code>
+  var foo = BetaCreator(document.getElementById('myImg'), function() {<br />
+  &nbsp; &nbsp; fooIsReady = true;<br />
+  &nbsp; &nbsp; foo = this; // 'this' in the onReady callback is the same object returned by calling BetaCreator();<br />
+  },{<br />
+  &nbsp; &nbsp; zoom: 'contain',<br />
+  &nbsp; &nbsp; height: 400,<br />
+  &nbsp; &nbsp; width: '100%',<br />
+  &nbsp; &nbsp; parent: document.getElementById('myDiv'),<br />
+  &nbsp; &nbsp; onChange: function() {<br />
+  &nbsp; &nbsp; &nbsp; &nbsp; // do something (call getData and save it?)<br />
+  &nbsp; &nbsp; }<br />
+  });
+</code>
+</p>
+
+<p>
+  The settings are as follows:
+
+<dl>
+  <dt>zoom</dt>
+  <dd>The zoom level for the editor upon load. Accepts a number from 1-1200, 'cover', 'contain' (default).</dd>
+  <dt>height</dt>
+  <dd>The inner height of the editor, not including the option bar at the top. Can be a number or a percentage as a string ('100%'). If omitted it will be the height of the image.</dd>
+  <dt>width</dt>
+  <dd>The inner width of the editor. Can be a number or a percentage as a string ('100%'). If omitted it will be the width of the image. Note: there is a minimum width of 556 enforced if you set this to a number or omit it (to fit the option bar).</dd>
+  <dt>parent</dt>
+  <dd>The parent element for the editor to be appended to. If omitted, the source image will be replaced by the editor.</dd>
+  <dt>onChange</dt>
+  <dd>A callback function that will be called every time the document is changed by the user.</dd>
+</dl>
+</p>
+
+<h2>API</h2>
+
+<p>
+  Calling <code>BetaCreator()</code> returns an object with the following API methods on it:
+
+  <dl>
+    <dt>getData(escape:Boolean = false):String</dt>
+    <dd>Returns a string of JSON encoded data representing the drawing layer of the editor. It takes an optional boolean <code>escape</code> which, if true, will cause the output of <code>getData</code> to have quotes and special characters (like new lines) escaped. This is particularly useful if you were to store this in a database and inject it into some JavaScript code on the server. For example if you did the following in php, you would need to have the data escaped: <code>myBetaCreator.getData("&lt;?php echo $bcData; ?&gt;");</code></dd>
+  </dl>
+  <dl>
+    <dt>getImage(includeSource:Boolean = false, type:String = 'png'):String</dt>
+    <dd>Returns a base64 encoded data URI of the image. It takes two optional parameters. <code>includeSource</code> is a boolean which, if true, will return the image data for the drawing layer composited with the source image. The <code>type</code> parameter can be either 'png' or 'jpg'. In order for 'jpg' to work, <code>includeSource</code> will have to be true. There is no point in giving back the drawing layer without transparency. With no parameters <code>getImage</code> will produce the image data for the drawing layer as a PNG.</dd>
+  </dl>
+  <dl>
+    <dt>loadData(data:String)</dt>
+    <dd>Takes a string of JSON as output from <code>getData</code> and loads it into the editor.</dd>
+  </dl>
+
+  <strong>Note: These methods will not work until the editor has been initialized. Use the onReady callback to know when it is safe to call API methods.</strong>
+</p>
+
+
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/nemophrost/betacreator/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/nemophrost/betacreator/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/nemophrost/betacreator"></a> is maintained by <a href="https://github.com/nemophrost">nemophrost</a>.</p>
+
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>

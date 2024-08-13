@@ -1,149 +1,195 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+<head>
+	<meta charset='utf-8'>
+	<title>BetaCreator - Climbing topo tool</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	<link rel="stylesheet" type="text/css" href="stylesheets/betacreator.css" media="all" />
+	<script src="javascripts/betacreator.js"></script>
 
-    <title>Betacreator by nemophrost</title>
-  </head>
+	<style type="text/css">
+	* { margin: 0; padding: 0; }
+	body { font-family: sans-serif; }
+	html, body, #bc {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+	#bc {
+		flex-direction: column;
+	}
+	#bc p {
+		height: 2em;
+		padding: .5em;
+		display: flex;
+		align-items: stretch;
+		justify-content: space-between;
+		background: #ccc;
+	}
+	#container {
+		height: calc(100% - 3em);
+	}
+	#bc p span {
+		display: flex;
+		align-items: stretch;
+		justify-content: space-between;
+		gap: .5em;
+	}
+	#bc p button, #bc p a {
+		padding: .3em;
+		font-size: 1rem;
+		border-radius: .2em;
+		border: none;
+		box-shadow: 0px 0px 10px #666;
+		background: #fff;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	#bc p button:hover, #bc p a:hover {
+		box-shadow: 0px 0px 5px darkorange;
+	}
+	#src {
+		display: none;
+	}
+	</style>
+</head>
+<body>
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>Betacreator</h1>
-        <h2>BetaCreator is a free tool for the creation of rock climbing route guides/beta photos.</h2>
-        <a href="https://github.com/nemophrost/betacreator" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+<div id="bc">
+  <p>
+  	<button id="name">
+  		<svg fill="none" height="24" viewBox="0 0 32 32" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m16.8333 10h8.1667c1.1487 0 2 .8513 2 2v1l-13 10.5-11.39062 4.7305c-.38839-.6003-.60938-1.4577-.60938-2.2305v-17.91966c0-1.14874.93156-2.08034 2.08027-2.08034h6.67503c.8087 0 1.5843.3201 2.1577.89041l2.4527 2.49716c.39.38749.9179.61243 1.4676.61243z" fill="#ffb02e"/><path d="m27.911 13h-17.025c-.7582.0002-1.49783.2346-2.11771.6711-.61989.4366-1.08973 1.054-1.34528 1.7679-4.591 13.165-4.212 12.2189-4.328 12.3669-.04908.0758-.1161.1383-.19513.1819s-.16762.067-.25787.0681c-.06449-.0008-.1275-.0195-.18201-.0539.34169.643.8617 1.1738 1.49762 1.5285.63592.3548 1.36074.5185 2.0874.4715h17.95198c.4363-.0021.8605-.1445 1.2096-.4062.3492-.2616.6049-.6286.7294-1.0468l3.962-12.835c.0988-.3124.1227-.6437.0696-.9669-.0531-.3233-.1816-.6295-.3752-.8938-.1935-.2644-.4465-.4793-.7387-.6276-.2921-.1482-.6151-.2256-.9427-.2257z" fill="#fcd53f"/></svg>
+  		<b>Click here to open an image</b><i></i>
+  	</button>
+	<input type="file" id="src" />
+	<span>
+		<button onClick="downloadData()">Download data</button>
+		<button onClick="exportImage()">Export image</button>
+		<a href="help.html" target="_blank" title="Help">
+			<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="m256 8c-136.957 0-248 111.083-248 248 0 136.997 111.043 248 248 248s248-111.003 248-248c0-136.917-111.043-248-248-248zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm107.244-255.2c0 67.052-72.421 68.084-72.421 92.863v6.337c0 6.627-5.373 12-12 12h-45.647c-6.627 0-12-5.373-12-12v-8.659c0-35.745 27.1-50.034 47.579-61.516 17.561-9.845 28.324-16.541 28.324-29.579 0-17.246-21.999-28.693-39.784-28.693-23.189 0-33.894 10.977-48.942 29.969-4.057 5.12-11.46 6.071-16.666 2.124l-27.824-21.098c-5.107-3.872-6.251-11.066-2.644-16.363 23.627-34.694 53.721-54.185 100.575-54.185 49.071 0 101.45 38.304 101.45 88.8zm-65.244 167.2c0 23.159-18.841 42-42 42s-42-18.841-42-42 18.841-42 42-42 42 18.841 42 42z"/></svg>
+		</a>
+	</span>
+  </p>
+  <div id="container">
+  </div>
+</div>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>Try it</h1>
-          <p><a href="demo.html">Click here to open the demo</a></p>
+<script type="text/javascript">
+var betaCreator = null;
+var timer = null;
 
-<h2>Setup</h2>
+function init() {
+	const src = document.querySelector('#src');
+	const container = document.querySelector('#container');
+	document.querySelector('#name').onclick = () => src.click();
 
-<p>
-  To use BetaCreator on your site, you will first need to download the code and include the BetaCreator stylesheet, icon sheet, and javascript file on your server. The stylesheet can be found at <code>css/betacreator.css</code>, the icon sheet at <code>css/images/icons_13.png</code>, and the javascript file at <code>js/bin/betacreator.js</code>. The stylesheet expects the icon sheet to be in a folder called <code>images/</code> that exists along side the stylesheet itself.
-</p>
-<p>
-  Next you will need to include the stylesheet and the javascript file in your page headers as follows:
-</p>
+	src.onchange = () => {
+		if (src.files.length != 1) {
+			return;
+		}
 
-<p>
-  <code>&lt;link rel="stylesheet" type="text/css" href="stylesheets/betacreator.css" /&gt;</code>
-</p>
-<p>
-  <code>&lt;script src="javascripts/betacreator.js"&gt;&lt;/script&gt;</code>
-</p>
+		const f = src.files[0];
 
-<h2>Usage</h2>
+		if (f.type.endsWith('/json')) {
+			if (!betaCreator) {
+				alert('No image is loaded, cannot load shapes');
+				src.value = '';
+				return;
+			}
 
-<p>
-  To create a BetaCreator instance, you must call BetaCreator with an image element as the first parameter. It takes an optional second parameter which contain settings.
-</p>
-<p>
-  <code>
-    BetaCreator(image, onReady, settings);
-  </code>
-</p>
-<p>
-  So, in the simplest case, using BetaCreator would look something like this:
-</p>
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				betaCreator.loadData(e.target.result);
+			};
+			reader.readAsText(f);
+			return;
+		}
 
-<p>
-<code>
-  var foo = BetaCreator(document.getElementById('myImg'));
-</code>
-</p>
+		// If image, add preview thumbnail
+		if (!f.type.startsWith('image/')) {
+			alert('This file is not an image');
+			src.value = '';
+			return;
+		}
 
-<p>
-  With some settings, it might look like this:
-</p>
+		if (betaCreator && !confirm('Warning: this will DELETE your topo! Click OK to DELETE!')) {
+			src.value = '';
+			return;
+		}
 
-<p>
-<code>
-  var foo = BetaCreator(document.getElementById('myImg'), function() {<br />
-  &nbsp; &nbsp; fooIsReady = true;<br />
-  &nbsp; &nbsp; foo = this; // 'this' in the onReady callback is the same object returned by calling BetaCreator();<br />
-  },{<br />
-  &nbsp; &nbsp; zoom: 'contain',<br />
-  &nbsp; &nbsp; height: 400,<br />
-  &nbsp; &nbsp; width: '100%',<br />
-  &nbsp; &nbsp; parent: document.getElementById('myDiv'),<br />
-  &nbsp; &nbsp; onChange: function() {<br />
-  &nbsp; &nbsp; &nbsp; &nbsp; // do something (call getData and save it?)<br />
-  &nbsp; &nbsp; }<br />
-  });
-</code>
-</p>
+		const reader = new FileReader();
+		reader.onload = (e) => {
+			localStorage.bcImage = null;
+			localStorage.bcData = null;
+			loadImage(e.target.result, f.name, false);
+		};
+		reader.readAsDataURL(f);
+	}
 
-<p>
-  The settings are as follows:
+	if (localStorage.bcImage) {
+		loadImage(localStorage.bcImage, localStorage.bcName, true);
+	}
+}
 
-<dl>
-  <dt>zoom</dt>
-  <dd>The zoom level for the editor upon load. Accepts a number from 1-1200, 'cover', 'contain' (default).</dd>
-  <dt>height</dt>
-  <dd>The inner height of the editor, not including the option bar at the top. Can be a number or a percentage as a string ('100%'). If omitted it will be the height of the image.</dd>
-  <dt>width</dt>
-  <dd>The inner width of the editor. Can be a number or a percentage as a string ('100%'). If omitted it will be the width of the image. Note: there is a minimum width of 556 enforced if you set this to a number or omit it (to fit the option bar).</dd>
-  <dt>parent</dt>
-  <dd>The parent element for the editor to be appended to. If omitted, the source image will be replaced by the editor.</dd>
-  <dt>onChange</dt>
-  <dd>A callback function that will be called every time the document is changed by the user.</dd>
-</dl>
-</p>
+function loadImage(url, file_name, load_data) {
+	container.innerHTML = '';
+	const img = document.createElement('img');
+	container.appendChild(img);
 
-<h2>API</h2>
+	img.onload = () => {
+		localStorage.bcImage = img.src;
+		localStorage.bcName = file_name;
 
-<p>
-  Calling <code>BetaCreator()</code> returns an object with the following API methods on it:
+		BetaCreator(img, function() {
+			betaCreator = this;
+			if (load_data && localStorage.bcData) {
+				betaCreator.loadData(localStorage.bcData);
+			}
+			document.querySelector('#name b').innerText = file_name;
+			window.clearInterval(timer);
+			timer = window.setInterval(() => {
+				// Auto-save, as onChange callback does not work
+				localStorage.bcData = betaCreator.getData();
+			}, 1000);
+		},{
+			zoom: 'contain',
+			height: '100%',
+			width: '100%'
+		});
+	};
 
-  <dl>
-    <dt>getData(escape:Boolean = false):String</dt>
-    <dd>Returns a string of JSON encoded data representing the drawing layer of the editor. It takes an optional boolean <code>escape</code> which, if true, will cause the output of <code>getData</code> to have quotes and special characters (like new lines) escaped. This is particularly useful if you were to store this in a database and inject it into some JavaScript code on the server. For example if you did the following in php, you would need to have the data escaped: <code>myBetaCreator.getData("&lt;?php echo $bcData; ?&gt;");</code></dd>
-  </dl>
-  <dl>
-    <dt>getImage(includeSource:Boolean = false, type:String = 'png'):String</dt>
-    <dd>Returns a base64 encoded data URI of the image. It takes two optional parameters. <code>includeSource</code> is a boolean which, if true, will return the image data for the drawing layer composited with the source image. The <code>type</code> parameter can be either 'png' or 'jpg'. In order for 'jpg' to work, <code>includeSource</code> will have to be true. There is no point in giving back the drawing layer without transparency. With no parameters <code>getImage</code> will produce the image data for the drawing layer as a PNG.</dd>
-  </dl>
-  <dl>
-    <dt>loadData(data:String)</dt>
-    <dd>Takes a string of JSON as output from <code>getData</code> and loads it into the editor.</dd>
-  </dl>
+	img.src = url;
+}
 
-  <strong>Note: These methods will not work until the editor has been initialized. Use the onReady callback to know when it is safe to call API methods.</strong>
-</p>
+function downloadData() {
+	const blob = new Blob([betaCreator.getData()], { type: "application/json" });
+	const temp_object_url = window.URL.createObjectURL(blob);
+	const a = document.createElement('a');
+	a.style.display = 'none';
+	a.href = temp_object_url;
+	a.download = localStorage.bcName + '_betacreator.json';
+	document.body.appendChild(a);
+	a.click();
+	window.URL.revokeObjectURL(temp_object_url);
+	a.remove();
+}
 
+function exportImage() {
+	const a = document.createElement('a');
+	a.style.display = 'none';
+	a.href = betaCreator.getImage(true, 'png');
+	a.download = localStorage.bcName.replace(/\.[a-z]+$/, '_betacreator.png');
+	document.body.appendChild(a);
+	a.click();
+	a.remove();
+}
 
-        </section>
+init();
+</script>
 
-        <aside id="sidebar">
-          <a href="https://github.com/nemophrost/betacreator/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/nemophrost/betacreator/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/nemophrost/betacreator"></a> is maintained by <a href="https://github.com/nemophrost">nemophrost</a>.</p>
-
-        </aside>
-      </div>
-    </div>
-
-  
-  </body>
+</body>
 </html>
