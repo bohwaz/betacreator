@@ -7,6 +7,10 @@ Use the web app at http://bohwaz.github.io/betacreator/
 
 Note: I (@bohwaz) didn't create this tool, I just fixed it and made it working locally. Please don't report issues here. Thanks to [@heliodor](https://github.com/heliodor/betacreator) for fixing the code.
 
+### Alternatives
+
+* [Topo Editor](https://topoeditor.com/) (closed source)
+
 Setting Up a Development Environment
 ---
 
