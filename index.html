@@ -141,8 +141,19 @@ function loadImage(url, file_name, load_data) {
 	container.appendChild(img);
 
 	img.onload = () => {
-		localStorage.bcImage = img.src;
-		localStorage.bcName = file_name;
+		try {
+			localStorage.bcImage = img.src;
+			localStorage.bcName = file_name;
+		}
+		catch (e) {
+			if (e.message.match(/quota/i)) {
+				alert('The image you selected is too large for your browser storage. Please use a smaller image.');
+				localStorage = {};
+				return;
+			}
+
+			throw e;
+		}
 
 		BetaCreator(img, function() {
 			betaCreator = this;
