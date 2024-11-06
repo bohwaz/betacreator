@@ -116,7 +116,7 @@ function init() {
 			return;
 		}
 
-		if (f.file.size > 8*1024*1024) {
+		if (f.size > 8*1024*1024) {
 			alert('This file is too large for your browser storage, please use an image that is below 8 MB.');
 			src.value = '';
 			return;
