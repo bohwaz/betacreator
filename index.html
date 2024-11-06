@@ -149,6 +149,7 @@ function loadImage(url, file_name, load_data) {
 			if (e.message.match(/quota/i)) {
 				alert('The image you selected is too large for your browser storage. Please use a smaller image.');
 				localStorage = {};
+				img.src = null;
 				return;
 			}
 
