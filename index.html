@@ -116,6 +116,12 @@ function init() {
 			return;
 		}
 
+		if (f.file.size > 8*1024*1024) {
+			alert('This file is too large for your browser storage, please use an image that is below 8 MB.');
+			src.value = '';
+			return;
+		}
+
 		if (betaCreator && !confirm('Warning: this will DELETE your topo! Click OK to DELETE!')) {
 			src.value = '';
 			return;
@@ -149,7 +155,7 @@ function loadImage(url, file_name, load_data) {
 			if (e.message.match(/quota/i)) {
 				localStorage.bcImage = null;
 				localStorage.bcName = null;
-				alert('The image you selected is too large for your browser storage. Please use a smaller image (less than 8MB).');
+				alert('The image you selected is too large for your browser storage. Please use a smaller image.');
 				img.remove();
 				return;
 			}
